@@ -7,6 +7,9 @@ module.exports = {
     connection: {
       filename:  path.resolve(__dirname , "src" , "database" , "database.db") 
     },
+    pool: {
+      afterCreate: (conn,db) => conn.run('', db)
+    },
     migrations:{
       directory: path.resolve(__dirname, "src" , "database" , "knex" , "migrations")
     },
