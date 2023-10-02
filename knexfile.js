@@ -8,7 +8,7 @@ module.exports = {
       filename:  path.resolve(__dirname , "src" , "database" , "database.db") 
     },
     pool: {
-      afterCreate: (conn,db) => conn.run('', db)
+      afterCreate: (conn,db) => conn.run('PRAGMA foreign_keys = ON', db)
     },
     migrations:{
       directory: path.resolve(__dirname, "src" , "database" , "knex" , "migrations")
