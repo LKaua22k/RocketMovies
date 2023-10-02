@@ -1,7 +1,10 @@
 const express = require('express')
 const MyDatabase = require('./database/sqlite')
+const routes = require('./routes')
 
 const  app = express()
+
+app.use(routes)
 app.use(express.json())
 
 MyDatabase()
