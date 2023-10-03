@@ -1,4 +1,4 @@
-const knex = require("../database/knex");
+const knex = require("../database/knex")
 
 class Usercontroller{
     async create(req,res){
@@ -14,4 +14,4 @@ class Usercontroller{
     }
 }
 
-module.exports = Usercontroller
+module.exports = Usercontroller;
