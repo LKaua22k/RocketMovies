@@ -6,7 +6,7 @@ const usercontroller = new usersController()
 
 const routes = Router()
 
-routes.use('/:id', usercontroller)
+routes.use('/users', usercontroller.create)
 
 module.exports = routes
 
