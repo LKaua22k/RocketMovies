@@ -18,6 +18,11 @@ class Usercontroller{
 
         return res.status(201).json({message: "User create"})
     }
+
+    async update(req,res){
+        const { name, email , password} = req.body
+        const {id} = req.params
+    }
 }
 
 module.exports = Usercontroller;
