@@ -22,6 +22,14 @@ class Usercontroller{
     async update(req,res){
         const { name, email , password} = req.body
         const {id} = req.params
+
+        const user = await knex('users').where({id}).first()
+
+        if(!user){
+            throw new AppError('Usuario não encontrado')
+        }
+
+        return res.json({message: "Usuario atualizado"})
     }
 }
 
