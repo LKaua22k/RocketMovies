@@ -52,10 +52,13 @@ class Usercontroller{
 
         user.password = await hash(password, 8)
 
+        const updated_at = knex.fn.now()
+
         await knex('users').update({
             name: user.name,
             email: user.email,
-            password: user.password
+            password: user.password,
+            updated_at
         }).where({id: user.id})
 
         return res.json({message: "Usuario atualizado"})
