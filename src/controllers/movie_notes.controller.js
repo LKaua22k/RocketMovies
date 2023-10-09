@@ -20,13 +20,25 @@ class MovieNotesController {
             }
         })
 
-        await knex('movie_tags').insert(TagsInsert)
-
-        
+        await knex('movie_tags').insert(TagsInsert) 
 
         return res.json({message: "Nota criada"})
     }
 
+    async show(req,res){
+
+        const id = req.params
+
+        const notes = await knex('movie_notes').where({id}).first()
+        const tags = await knex('movie_tags').where({note_id: id}).orderBy(name)
+
+        return res.json(
+            ...notes,
+            tags
+        )
+    }
+
+    
 }
 
 module.exports = MovieNotesController
