@@ -45,6 +45,16 @@ class MovieNotesController {
 
         return res.json({message: "Nota Apagada"})
     }
+
+    async index(req,res){
+        const user_id = req.params
+
+        await knex('movie_notes').where({user_id}).orderBy(title) 
+
+        return res.json()
+
+
+    }
 }
 
 module.exports = MovieNotesController
