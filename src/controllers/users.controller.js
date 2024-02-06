@@ -21,15 +21,15 @@ class Usercontroller{
 
     async update(req,res){
         const { name, email , password , old_password} = req.body
-        const {id} = req.params
+        const user_id = req.user.id
 
-        const user = await knex('users').where({id}).first()
+        const user = await knex('users').where({id : user_id}).first()
 
         if(!user){
             throw new AppError('Usuario não encontrado')
         }
 
-        const UserEmailExist = await knex('users').where({email}).first()
+        const UserEmailExist = await knex("users").where({email}).first()
 
         if(UserEmailExist && UserEmailExist.id !== user.id){
             throw new AppError('Usuario ja tem o email cadastrado')
@@ -43,14 +43,15 @@ class Usercontroller{
         }
 
         if(password && old_password){
-            const checkPassword = compare(old_password,user.password)
+            const checkPassword = await compare(old_password, user.password)
 
             if(!checkPassword){
                 throw new AppError('A senha antiga não confere')
             }
+            
+            user.password = await hash(password, 8)
         }
 
-        user.password = await hash(password, 8)
 
         const updated_at = knex.fn.now()
 
@@ -59,7 +60,7 @@ class Usercontroller{
             email: user.email,
             password: user.password,
             updated_at
-        }).where({id: user.id})
+        }).where({id: user_id})
 
         return res.json({message: "Usuario atualizado"})
     }

@@ -4,8 +4,8 @@ const MovietagsController = require('../controllers/movi_tags.controller')
 
 const movietagscontroller = new MovietagsController()
 
-const routes = Router()
+const MovieTagsRoutes = Router()
 
-routes.get('/', movietagscontroller.index)
+MovieTagsRoutes.get('/', movietagscontroller.index)
 
-module.exports = routes
+module.exports = MovieTagsRoutes
